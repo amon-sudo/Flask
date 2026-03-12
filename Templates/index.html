@@ -1,11 +1,16 @@
-<! DOCTYPE html>
+<!DOCTYPE html>
 
 <html>
 <head>
     <title>Home page</title>
 </head>
     <body>
-        <h1>Home Page</h1>
+        <h1>Home Page !</h1>
         <P>Hello</P>
+
+        {% for x in content %}
+            
+                <p>{{x}}</p>
+        {%endfor%}
     </body>
 </html>
