@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template
 
 app = Flask(__name__)
 
@@ -6,14 +6,8 @@ app = Flask(__name__)
 @app.route("/")
 # defining the pages
 def home():
-    return "<h1>Hello this is the main page</h1>"
-@app.route("/<name>")
-def user(name):
-    return f"Hello {name}"
+    return render_template("index.html")
 
-@app.route("/admin")
-def admin ():
-    return redirect(url_for("home"))
 
 if __name__ == "__main__":
     app.run()
