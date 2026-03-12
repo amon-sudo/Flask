@@ -6,8 +6,8 @@ app = Flask(__name__)
 @app.route("/<name>")
 # defining the pages
 def home(name):
-    return render_template("index.html", content =["Amon", "Glen", "James"] )
+    return render_template("index.html", content =)
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
