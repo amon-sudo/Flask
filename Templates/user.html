@@ -1,20 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}
+{% block title %}ee{% endblock title %}
 
-{% block content %}
- {%with messages = get_flashed_message%}
-        {% if messages %}
-            {% for message in messages  %}
-                <p>{{message}}</p>
-            {% endfor %}
-        
-        {% endif %}
-    {% endwith %}
-    <p> Welcome {{user}}</p>
-
-
-{% endblock  %}
+    {% block content %}
+         {%with messages = get_flashed_messages()%}
+            {% if messages %}
+                {% for msg in messages  %}
+                    <p>{{msg}}</p>
+                {% endfor %}
+            
+            {% endif %}
+        {% endwith %}
+<p> Welcome {{user}}</p>
 
 
 {% endblock  %}
+
+

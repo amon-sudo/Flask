@@ -21,6 +21,7 @@ def login():
         return redirect(url_for("user"))
     else:
         if "user" in session:
+            flash("already logged!!")
             return redirect(url_for("user"))
             
         return render_template("login.html")
@@ -38,9 +39,8 @@ def user():
 
 @app.route("/logout")
 def logout():
-    if "user" in session:
-        user = session["user"]
-        flash("You are logged out succesful, {user}", "info")
+    
+    flash("You are logged out succesful", "info")
     session.pop("user", None)
     
     return redirect(url_for("login"))
