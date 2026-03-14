@@ -1,5 +1,6 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash
 from datetime import timedelta
+import flask_sqlalchemy
 
 app = Flask(__name__)
 app.secret_key = "hello"
@@ -39,8 +40,9 @@ def user():
 
 @app.route("/logout")
 def logout():
-    session.pop("user", None)
     flash("You are logged out successful")
+    session.pop("user", None)
+    
     return redirect(url_for("login"))
 
 if __name__ == "__main__":
