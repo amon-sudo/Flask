@@ -36,11 +36,14 @@ def user():
         if request.method == "POST":
             email = request.form["email"]
             session["email"] = email
-            return render_template("user.html", email = email)
             flash("email was saved!!")
+           
+            
         else:
-            if "email" in email:
+            
+            if "email" in session:
                 email = session["email"]
+        return render_template("user.html", email = email)
     else:
         flash("you are not logged in!!")
         return redirect(url_for("login"))
