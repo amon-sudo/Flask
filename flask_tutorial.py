@@ -13,6 +13,12 @@ app.permanent_session_lifetime = timedelta(minutes=5)
 db = SQLAlchemy(app)
 class users(db.model):
     _id =db.Column("id", db.Integer, primary_key=True)
+    name = db.Column("name", db.String(100))
+    email = db.Column(db.String(100))
+    
+    def __init__(self, name):
+        self.name = name
+        self.email = self.email
     
     
     
@@ -69,4 +75,5 @@ def logout():
     return redirect(url_for("login"))
 
 if __name__ == "__main__":
+    db.create_all()
     app.run(debug=True)
