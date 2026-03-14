@@ -4,7 +4,18 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.secret_key = "hello"
+app.config['SQLALCHEMY_DATABASE_URL'] = 'sqlite:///users.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
 app.permanent_session_lifetime = timedelta(minutes=5)
+
+
+
+db = SQLAlchemy(app)
+class users(db.model):
+    _id =db.Column("id", db.Integer, primary_key=True)
+    
+    
+    
 # route.
 @app.route("/")
 # defining the pages
