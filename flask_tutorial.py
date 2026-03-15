@@ -4,21 +4,21 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.secret_key = "hello"
-app.config['SQLALCHEMY_DATABASE_URL'] = 'sqlite:///users.sqlite3'
-app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.permanent_session_lifetime = timedelta(minutes=5)
 
 
 
 db = SQLAlchemy(app)
-class users(db.model):
+class Users(db.Model):
     _id =db.Column("id", db.Integer, primary_key=True)
     name = db.Column("name", db.String(100))
     email = db.Column(db.String(100))
     
-    def __init__(self, name):
+    def __init__(self, name,email):
         self.name = name
-        self.email = self.email
+        self.email = email
     
     
     
@@ -37,14 +37,14 @@ def login():
         session["user"] = user
         
         
-        found_user = users.users.query.filter_by(name=user).first()
+        found_user = Users.query.filter_by(name=user).first()
         
         if found_user:
             session["email"] = found_user.email
         else:
-            usr = users(user, "")
+            usr = Users(user, "")
             db.session.add(usr)
-            db.commit()
+            db.session.commit()
         
         
         flash("Login succesful!!")
@@ -65,6 +65,9 @@ def user():
         if request.method == "POST":
             email = request.form["email"]
             session["email"] = email
+            found_user = Users.query.filter_by(name=user).first()
+            found_user.email = email
+            db.session.commit()
             flash("email was saved!!")
            
             
@@ -85,7 +88,7 @@ def logout():
     session.pop("email", None)
     
     return redirect(url_for("login"))
-
 if __name__ == "__main__":
-    db.create_all()
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
