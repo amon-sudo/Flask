@@ -27,6 +27,9 @@ class Users(db.Model):
 # defining the pages
 def home():
     return render_template("index.html" )
+@app.route("/view")
+def view():
+    return render_template("view.html", values=Users.query.all() )
 
 @app.route("/login", methods= ["POST", "GET"])
 
