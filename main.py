@@ -4,7 +4,7 @@ from admin.second import second
 
 app = Flask(__name__)
 app.register_blueprint(second, url_prefix="/admin")
-app.route("/")
+app.route("/test")
 def test():
     return "<h1>Test</h1>"
 
