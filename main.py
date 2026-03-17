@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, Blueprint
-from second import second
+from admin.second import second
 
 
 app = Flask(__name__)
