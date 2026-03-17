@@ -4,7 +4,7 @@ from flask import Flask, render_template, Blueprint
 second = Blueprint("second", __name__, static_folder="static", template_folder="templates")
 
 @second.route("/home")
-# @second.route("/")
+@second.route("/")
 def home():
     return render_template("index.html")
 
